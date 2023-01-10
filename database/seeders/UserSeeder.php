@@ -17,5 +17,12 @@ class UserSeeder extends Seeder
             'email' => 'manage@tasks.com',
             'password' => Hash::make('manage'),
         ]);
+
+        User::create([
+            'name' => 'Example Client',
+            'role_id' => 2,
+            'email' => 'client@tasks.com',
+            'password' => Hash::make('manage'),
+        ]);
     }
 }
