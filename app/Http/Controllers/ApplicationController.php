@@ -21,9 +21,9 @@ class ApplicationController extends Controller
         $request->validate([
             'subject' => 'required|max:255',
             'message' => 'required',
-            'file_url' => 'mimes:jpg,png,pdf,webp,gif',
+            'file_url' => 'file|mimes:jpg,png,pdf',
         ]);
-
+        // ,webp,gif
         $application = Application::create([
             'user_id' => auth()->user()->id,
             'subject' => $request->subject,
