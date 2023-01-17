@@ -23,28 +23,42 @@ class ApplicationCreated extends Mailable
         $this->application = $application;
     }
 
-
-    public function envelope()
+    public function build()
     {
-        return new Envelope(
-            from: new Address('client@example.com', 'Client Way'),
-            subject: 'Application Created',
-        );
+        $mail = $this->from('client@example.com', 'Client Way')
+            ->subject('Application Created')
+            ->view('emails.application_created');
+
+        if (!is_null($this->application->file_url)) {
+            $mail = Attachment::FromStorageDisk('public', $this->application->file_url);
+        }
+
+        return $mail;
     }
 
 
-    public function content()
-    {
-        return new Content(
-            view: 'emails.application_created',
-        );
-    }
+    // public function envelope()
+    // {
+    //     return new Envelope(
+    //         from: new Address('client@example.com', 'Client Way'),
+    //         subject: 'Application Created',
+    //     );
+    // }
 
 
-    public function attachments()
-    {
-        return [
-            Attachment::fromStorageDisk('public', $this->application->file_url)
-        ];
-    }
+    // public function content()
+    // {
+    //     return new Content(
+    //         view: 'emails.application_created',
+    //     );
+    // }
+
+
+    // public function attachments()
+    // {
+    //     return [
+    //         Attachment::fromStorageDisk('public', $this->application->file_url),
+
+    //     ];
+    // }
 }
