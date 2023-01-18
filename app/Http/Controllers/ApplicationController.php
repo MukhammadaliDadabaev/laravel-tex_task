@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreApplicationRequest;
 use App\Jobs\SendEmailJob;
 use App\Models\Application;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 
 class ApplicationController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreApplicationRequest $request)
     {
         if ($this->checkDate()) {
             return back()->with('error', 'You can create only application 1 a day...😎');
@@ -24,12 +24,6 @@ class ApplicationController extends Controller
                 'public'
             );
         }
-
-        $request->validate([
-            'subject' => 'required|max:255',
-            'message' => 'required',
-            'file_url' => 'file|mimes:jpg,png,pdf,webp,gif',
-        ]);
 
         $application = Application::create([
             'user_id' => auth()->user()->id,
