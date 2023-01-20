@@ -27,18 +27,37 @@
                 </div>
               </div>
 
-              <div class="mt-4 mb-3">
-                <div class="mb-3 text-xl font-bold">{{ $application->subject }}</div>
-                <div class="text-sm text-neutral-600">{{ $application->message }}</div>
-              </div>
+              <div class="flex justify-between">
+                <div class="flex-1">
+                  <div class="mt-4 mb-3">
+                    <div class="mb-3 text-xl font-bold">{{ $application->subject }}</div>
+                    <div class="text-sm text-neutral-600">{{ $application->message }}</div>
+                  </div>
 
-              <div>
-                <div class="flex items-center justify-between text-slate-500">
-                  <div class="flex space-x-4 md:space-x-8">
-                    {{ $application->user->email }}
+                  <div>
+                    <div class="flex items-center justify-between text-slate-500">
+                      <div class="flex space-x-4 md:space-x-8">
+                        {{ $application->user->email }}
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <div class="flex flex-col text-center border rounded-xl m-5 p-5 hover:bg-gray-100 transition-all">
+                  @if (is_null($application->file_url))
+                  <span class="text-red-900">Not file</span>
+                  @else
+                  <a class="" href="{{ asset('storage/'. $application->file_url) }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-12 cursor-pointer text-green-900">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12" />
+                    </svg>
+                  </a>
+                  @endif
+
+                </div>
+
               </div>
+
             </div>
           </div>
           @endforeach
