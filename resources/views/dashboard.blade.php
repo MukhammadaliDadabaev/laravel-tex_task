@@ -33,7 +33,7 @@
               <div class="flex justify-between">
 
                 <div class="flex-1">
-                  <div class="mt-4 mb-3">
+                  <div class="mt-2 mb-3">
                     <div class="mb-3 text-xl font-bold">{{ $application->subject }}</div>
                     <div class="text-sm text-neutral-600">{{ $application->message }}</div>
                   </div>
@@ -62,15 +62,26 @@
                     </a>
                     @endif
                   </div>
+
+                  @if (! $application->answer()->exists())
                   <div class="mt-10">
                     <a href="{{ route('answers.create', ['application' => $application->id]) }}" type="button"
                       class="each-in-out mx-6 rounded bg-green-500 p-2 text-sm text-white transition duration-300 hover:bg-green-600">
                       ANSWER
                     </a>
                   </div>
-                </div>
+                  @endif
 
+                </div>
               </div>
+
+              @if ($application->answer()->exists())
+              <div class="">
+                <hr class="border-1 mt-2 border-blue-600">
+                <h2 class="font-bold text-xl text-cyan-900 mt-1">Answer:</h2>
+                <p>{{ $application->answer->body }}</p>
+              </div>
+              @endif
 
             </div>
           </div>
