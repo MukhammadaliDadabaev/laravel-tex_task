@@ -39,7 +39,7 @@ password: manage
 
 ## Contributing
 
-Kodga qo'shicha qo'shish uchun [Laravel documentation](https://laravel.com/docs/contributions) ga murojaat qiling.
+Kodga qo'shimcha qo'shish uchun [Laravel documentation](https://laravel.com/docs/contributions) ga murojaat qiling.
 
 ## License
 
